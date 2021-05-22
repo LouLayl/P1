@@ -1,0 +1,87 @@
+---
+
+**Project 1- L. Layland**
+**Data Visualisation Project**
+**Stroke Risk in Individuals with Heart Disease and Hypertension**
+
+output: html_document
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("ProjectScript.R")
+```
+
+**Data Origins**
+
+This dataset was uploaded to Kaggle.com by fedesoriano. There are a total of 5110 subjects; 249 who had experienced a stroke and 4861 who hadn't. The original study assesses many factors which may or may not be associated with stroke onset.
+
+**Research Aim**
+
+For the purpose of this data visualisation, only whether or not an individual has hypertension, and whether or not an individual has heart disease have been explored in relation to stroke cases.
+
+The relevant data (hypertension, heart disease, and stroke) were extracted from the dataset. 
+
+**Data Preparation**
+
+  __The first few rows of the data used in the present data visualisation:__
+ 
+```{r head}
+head(heart_hyper)
+```
+1 = present
+0 = absent
+
+ 
+__hypertention__ = whether hypertension was present or absent
+
+__heart_disease__ = whether heart disease was present or absent
+
+__heartdisease_stroke__ = whether both heart disease AND stroke were present or absent
+
+__hypertension_stroke__ = whether both hypertension AND stroke were present or absent
+
+__both_stroke__ = whether hypertension AND heart disease AND stroke were all present or absent.
+
+
+
+__The first few rows of the origninal dataset:__
+```{r head2}
+head(data)
+```
+
+All factors used in the visualisation was re-examined tp check for missing data. No data was missing:
+
+No missing data as to whether or not patients had stroke:
+```{r}
+heart_hyper %>%
+  filter(!stroke %in% c(0, 1))
+```
+
+No missing data as to whether or not patients had hypertension:
+```{r}
+heart_hyper %>%
+  filter(!hypertension %in% c(0,1))
+```
+
+No missing data as to whether or not patients had heart disease:
+```{r}
+heart_hyper %>%
+  filter(!heart_disease %in% c(0,1))
+```
+
+A table containing the relevant variables was created, with an added column of "percentage" to show the percentage of strokes across four conditions:
+  Individuals with neither hypertension nor heart disease, individuals with only hypertension (without heart disease), individuals with only heart disease (without hypertension), and individuals with both hypertesnion and heart disease.
+  The rows were also given the name of their group as labelled in the Group column to make it easier to read.
+```{r}
+head(percentage_graph)
+```
+
+**Visualisation**
+
+A graph to visualise the stroke risk in each of these groups was produced:
+The Y axis used the four different groups as shown in the Group column (Both, Heartdisease, Hypertension and Neither). The X axis reflects the percentage of individuals from each group suffering a stroke.
+  The colours were altered to make it easier to interpret.
+ 
+**Summary**
+
+Based on the present dataset, the graph reveals individuals are much more likely to suffer a stroke when presenting with both heart disease and hypertesnion, compared to individuals with just one of these conditions, or neither.
